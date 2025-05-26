@@ -1,13 +1,24 @@
+import { useSelector } from "react-redux";
 import Contacts from "./contacts";
 
+export default function ContactList({onDelete }) {
+    const phoneList = useSelector((state) => state.contact.items)
+    console.log("phoneList", phoneList)
+    const filter = useSelector((state) => state.filter.items); 
+  
+    const filteredContacts = phoneList.filter((contact) =>
+      contact.name.toLowerCase().includes(filter.toLowerCase())
+    );
 
-export default function ContactList({ phoneList, onDelete }) {
-    
+
     return (
         <ul>
-            {phoneList.map((phoneContact) => (
+            {filteredContacts.map((phoneContact) => (
                 <li key={phoneContact.id}>
-                    <Contacts id={phoneContact.id} name={phoneContact.name} number={phoneContact.number} onDelete={onDelete} />
+                    <Contacts id={phoneContact.id}
+                        name={phoneContact.name}
+                        number={phoneContact.number}
+                        onDelete={onDelete} />
                 </li>
             ))}
         </ul>
