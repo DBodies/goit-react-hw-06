@@ -5,7 +5,7 @@ import styles from './stylesForAllComponents.module.css'
 import { useDispatch } from "react-redux";
 import { addContact } from "../redux/contactsSlice";
 
-export default function ContactForm({ onAdd }) {
+export default function ContactForm() {
     
     const FeedbackSchema = Yup.object().shape({
     name: Yup.string().min(3, "Too short!").max(30, "Too long!").required("Required"),
